@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_010oj5m" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:collaboration id="Collaboration_0gff8mr">
+    <bpmn:participant id="Participant_0cr7xzz" name="SI Calculation" processRef="SICalculatoor" />
+  </bpmn:collaboration>
+  <bpmn:process id="SICalculatoor" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>Flow_1611wp4</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1d0bl4t" name="End">
+      <bpmn:incoming>Flow_1fu1mop</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_0awu8tf" name="SI Calculation and Persist" camunda:asyncBefore="true" camunda:class="com.camunda.example.SICalculator.process.InterestCalculator">
+      <bpmn:incoming>Flow_0xkpzxs</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fu1mop</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1611wp4" sourceRef="StartEvent_1" targetRef="Activity_1b1c28q" />
+    <bpmn:userTask id="Activity_1b1c28q" name="Department Data" camunda:asyncBefore="true" camunda:formKey="embedded:/forms/department.html">
+      <bpmn:incoming>Flow_1611wp4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xkpzxs</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0xkpzxs" sourceRef="Activity_1b1c28q" targetRef="Activity_0awu8tf" />
+    <bpmn:sequenceFlow id="Flow_1fu1mop" sourceRef="Activity_0awu8tf" targetRef="Event_1d0bl4t" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0gff8mr">
+      <bpmndi:BPMNShape id="Participant_0cr7xzz_di" bpmnElement="Participant_0cr7xzz" isHorizontal="true">
+        <dc:Bounds x="129" y="82" width="680" height="316" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1611wp4_di" bpmnElement="Flow_1611wp4">
+        <di:waypoint x="215" y="207" />
+        <di:waypoint x="270" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xkpzxs_di" bpmnElement="Flow_0xkpzxs">
+        <di:waypoint x="370" y="207" />
+        <di:waypoint x="500" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fu1mop_di" bpmnElement="Flow_1fu1mop">
+        <di:waypoint x="600" y="207" />
+        <di:waypoint x="752" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="189" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="185" y="232" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jwfur6_di" bpmnElement="Activity_1b1c28q">
+        <dc:Bounds x="270" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1d0bl4t_di" bpmnElement="Event_1d0bl4t">
+        <dc:Bounds x="752" y="189" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="760" y="232" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1g94ylr_di" bpmnElement="Activity_0awu8tf">
+        <dc:Bounds x="500" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
